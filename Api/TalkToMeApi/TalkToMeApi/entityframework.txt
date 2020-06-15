@@ -1,0 +1,6 @@
+EntityFramework6\Add-Migration Name -ConnectionString 'server=localhost\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.' -ConnectionProvider 'System.Data.SqlClient'
+
+EntityFramework6\Update-Database -ConnectionString 'server=localhost\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.' -ConnectionProvider 'System.Data.SqlClient'
+
+
+password: talktome123.
