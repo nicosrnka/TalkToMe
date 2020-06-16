@@ -10,4 +10,5 @@ public class WorkingSpace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_working_space);
     }
+
 }
