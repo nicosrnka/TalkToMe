@@ -10,4 +10,10 @@ class ContactModel {
     public String id;
     public String name;
     public String mobileNumber;
+
+    public ContactModel(String id, String name, String mobileNumber) {
+        this.id = id;
+        this.name = name;
+        this.mobileNumber = mobileNumber;
+    }
 }

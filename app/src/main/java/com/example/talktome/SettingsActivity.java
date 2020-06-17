@@ -19,5 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void gotoEditCaregiversSetting(View view) {
+        Intent intent = new Intent(this, EditCaregivers.class);
+        startActivity(intent);
     }
 }
