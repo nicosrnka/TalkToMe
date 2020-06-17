@@ -7,4 +7,5 @@
     <string name="phone">Telefon</string>
     <string name="firstname">Vorname</string>
     <string name="lastname">Nachname</string>
+    <string name="save">Speichern</string>
 </resources>

@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddCaregiver"></activity>
+        <activity android:name=".EditCaregivers"></activity>
+        <activity android:name=".AddCaregiver" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".WorkingSpace">
             <intent-filter>
