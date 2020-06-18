@@ -1,9 +1,11 @@
-package com.example.talktome;
+package com.example.talktome.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.talktome.R;
 
 public class SettingsActivity extends AppCompatActivity {
 

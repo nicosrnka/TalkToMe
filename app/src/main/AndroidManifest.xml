@@ -15,17 +15,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditCaregivers"></activity>
-        <activity android:name=".AddCaregiver" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".WorkingSpace">
+        <activity android:name=".activities.EditCaregivers"></activity>
+        <activity android:name=".activities.AddCaregiver" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.WorkingSpace">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

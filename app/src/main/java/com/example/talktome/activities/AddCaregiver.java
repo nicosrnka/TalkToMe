@@ -1,7 +1,9 @@
-package com.example.talktome;
+package com.example.talktome.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.talktome.R;
 
 public class AddCaregiver extends AppCompatActivity {
 
