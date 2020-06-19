@@ -1,4 +1,4 @@
-package com.example.talktome;
+package com.example.talktome.models;
 
 public class CaregiverModel {
     public String firstname;

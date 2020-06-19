@@ -1,4 +1,4 @@
-package com.example.talktome;
+package com.example.talktome.helper;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.talktome.R;
+import com.example.talktome.models.CaregiverModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,9 +31,9 @@ public class CaregiversAdapter extends RecyclerView.Adapter<CaregiversAdapter.Ca
         }
     }
 
-    List<CaregiverModel> caregivers;
+    public List<CaregiverModel> caregivers;
 
-    CaregiversAdapter(List<CaregiverModel> caregivers){
+    public CaregiversAdapter(List<CaregiverModel> caregivers){
         this.caregivers = caregivers;
     }
 

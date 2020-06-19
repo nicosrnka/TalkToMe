@@ -1,4 +1,4 @@
-package com.example.talktome;
+package com.example.talktome.calltypes;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -7,31 +7,33 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
 
+import com.example.talktome.helper.MessageSpeaker;
+import com.example.talktome.models.ContactModel;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactHandler {
+public class GeneralCall {
     Context appContext;
 
-    public ContactHandler(Context context) {
+    public GeneralCall(Context context) {
         appContext = context;
     }
 
     public void tryCallingName(String name) {
-        ContactHandler contactHandler = new ContactHandler(appContext);
-        List<ContactModel> contacts = contactHandler.getContactsByName(name);
+        List<ContactModel> contacts = this.getContactsByName(name);
         try {
-            contactHandler.handleContactList(contacts);
+            this.handleContactList(contacts);
         } catch (IllegalArgumentException ex) {
             new MessageSpeaker(appContext, ex.getMessage());
         }
     }
 
     @NotNull
-    private List<ContactModel> getContactsByName(String searchString) {
+    protected List<ContactModel> getContactsByName(String searchString) {
         List<ContactModel> contacts = new ArrayList<>();
         ContentResolver contentResolver = appContext.getContentResolver();
         Cursor cursor = contentResolver.query(
@@ -59,7 +61,8 @@ public class ContactHandler {
                         ContactModel contact = new ContactModel(
                                 id,
                                 cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)),
-                                cursorInfo.getString(cursorInfo.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                                cursorInfo.getString(cursorInfo.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)),
+                                cursorInfo.getString(cursorInfo.getColumnIndex(ContactsContract.CommonDataKinds.Phone.MIMETYPE))
                         );
                         contacts.add(contact);
                     }
@@ -72,7 +75,7 @@ public class ContactHandler {
         return contacts;
     }
 
-    private void handleContactList(@NotNull List<ContactModel> contacts) {
+    protected void handleContactList(@NotNull List<ContactModel> contacts) {
         if (contacts.isEmpty()) {
             String text = "Der Kontakt konnte nicht gefunden werden.";
             throw new IllegalArgumentException(text);
@@ -94,10 +97,18 @@ public class ContactHandler {
         }
     }
 
-    private void callContact(@NotNull ContactModel contactModel) {
+    protected String internationalizePhonenumber(@NotNull String number) {
+        if (number.startsWith("0")) {
+            number = "+43 " + number.substring(1);
+        }
+
+        return number;
+    }
+
+    protected void callContact(@NotNull ContactModel contactModel) {
         Intent i = new Intent(Intent.ACTION_CALL);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setData(Uri.parse("tel:" + contactModel.mobileNumber));
+        i.setData(Uri.parse("tel:" + internationalizePhonenumber(contactModel.mobileNumber)));
         appContext.startActivity(i);
     }
 }
