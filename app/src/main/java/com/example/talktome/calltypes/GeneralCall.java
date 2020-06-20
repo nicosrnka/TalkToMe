@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 
 import com.example.talktome.helper.MessageSpeaker;
+import com.example.talktome.models.CaregiverModel;
 import com.example.talktome.models.ContactModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -30,6 +31,13 @@ public class GeneralCall {
         } catch (IllegalArgumentException ex) {
             new MessageSpeaker(appContext, ex.getMessage());
         }
+    }
+
+    public void callCaregiver(@NotNull CaregiverModel caregiver) {
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setData(Uri.parse("tel:" + internationalizePhonenumber(caregiver.phonenumber)));
+        appContext.startActivity(i);
     }
 
     @NotNull
