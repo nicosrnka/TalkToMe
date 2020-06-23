@@ -17,5 +17,6 @@ namespace TalkToMeApi
         public string AddressTwo { get; set; }
         public string AddressThree { get; set; }
         public string Password { get; set; }
+        public int Id { get; set; }
     }
 }

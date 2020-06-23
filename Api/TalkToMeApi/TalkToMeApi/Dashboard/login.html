@@ -17,12 +17,32 @@
 
 </head>
 <body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="loginContainer" class="container mt-5 background-white padding-zero border-radius-login">
 
-        <form class="text-center border border-light p-5 border-radius-login" action="#!">
+        <form class="text-center border border-light p-5 border-radius-login">
             <p class="h4 mb-4">Login</p>
-            <input type="email" id="emailField" class="form-control mb-4" placeholder="E-mail">
-            <input type="password" id="passwordField" class="form-control mb-4" placeholder="Passwort">
+            <input type="email" id="emailFieldLogin" class="form-control mb-4" placeholder="E-mail" required>
+            <input type="password" id="passwordFieldLogin" class="form-control mb-4" placeholder="Passwort" required>
 
             <div class="d-flex justify-content-around">
                 <div>
@@ -35,7 +55,7 @@
                     <a href="">Passwort vergessen?</a>
                 </div>
             </div>
-            <button class="btn btn-info btn-block my-4" type="submit">Anmelden</button>
+            <button id="loginButton" type="button" class="btn btn-info btn-block my-4" onclick="login()">Anmelden</button>
             <p>
                 Noch nicht registriert?
                 <a class="text-info" onclick="switchTo()">Hier registrieren</a>
@@ -45,23 +65,30 @@
 
     <div id="registerContainer" class="container mt-xl-5 mt-lg-5 mt-md-5 mt-sm-5 background-white padding-zero d-none border-radius-login">
 
-        <form class="text-center border border-light p-5 border-radius-login" action="#!">
+        <div class="text-center border border-light p-5 border-radius-login">
             <p class="h4 mb-4">Registrieren</p>
-            <input type="email" id="emailField" class="form-control mb-4" placeholder="E-mail">
-            <input type="text" id="firstName" class="form-control mb-4" placeholder="Vorname">
-            <input type="text" id="sureName" class="form-control mb-4" placeholder="Nachname">
-            <input type="date" id="gebDat" class="form-control mb-4" placeholder="Geburtsdatum">
-            <input type="text" id="addressOne" class="form-control mb-4" placeholder="Adresse 1">
-            <input type="text" id="addressTwo" class="form-control mb-4" placeholder="Adresse 2">
-            <input type="text" id="addressThree" class="form-control mb-4" placeholder="Adresse 3">
-            <input type="password" id="passwordField" class="form-control mb-4" placeholder="Passwort">
-            <input type="password" id="passwordCheck" class="form-control mb-4" placeholder="Passwort bestätigen">
-            <button class="btn btn-info btn-block my-4" type="submit">Registrieren</button>
+            <input type="email" id="emailField" class="form-control mb-4" placeholder="E-mail" required>
+            <input type="text" id="firstName" class="form-control mb-4" placeholder="Vorname" required>
+            <input type="text" id="sureName" class="form-control mb-4" placeholder="Nachname" required>
+            <input type="date" id="gebDat" class="form-control mb-4" placeholder="Geburtsdatum" required>
+            <input type="text" id="addressOne" class="form-control mb-4" placeholder="Adresse 1" required>
+
+            <input type="text" id="addressTwo" class="form-control mb-1" placeholder="Adresse 2">
+            <small  class="form-text text-muted mb-4">
+                Optional
+            </small>
+            <input type="text" id="addressThree" class="form-control mb-1" placeholder="Adresse 3">
+            <small class="form-text text-muted mb-4">
+                Optional 
+            </small>
+            <input type="password" id="passwordField" class="form-control mb-4" placeholder="Passwort" required>
+            <input type="password" id="passwordCheck" class="form-control mb-4" placeholder="Passwort bestätigen" required>
+            <button class="btn btn-info btn-block my-4" id="registerButton" onclick="register()">Registrieren</button>
             <p>
                 Schon registriert?
                 <a class="text-info" onclick="switchTo()">Login</a>
             </p>
-        </form>
+        </div>
     </div>
 
     <script type="text/javascript" src="js/jquery.js"></script>
@@ -73,9 +100,77 @@
     <script type="text/javascript" src="js/mdb.js"></script>
 
     <script>
+        console.log(window.location.href);
         function switchTo() {
             $("#loginContainer").toggleClass("d-none");
             $("#registerContainer").toggleClass("d-none");
+        }
+
+        function login() {
+            let email = "";
+            let pwd = "";
+            email = document.getElementById("emailFieldLogin").value;
+            pwd = document.getElementById("passwordFieldLogin").value;
+            if (email != "" && pwd != "") {
+                $.get('https://localhost:5001/api/Login/Login?email=' + email + "&password=" + pwd)
+                    .done(function (data) {
+                        console.log(data);
+                        sessionStorage.setItem('id', data);
+                        window.location.href = window.location.href.replace("login.html", "app/index.html");
+                    }).fail(function (err) {
+                        $("#loginButton").before("<p class='text-danger' id='errorMsg'>Email oder Passwort sind falsch.</p>");
+                        $("#errorMsg").fadeOut(3000, function () {
+                            this.remove();
+                        });
+                    }).always(() => {
+                        console.log("asdasd");
+                    });
+                //$.get('https://localhost:5001/api/Login/Login?email=' + email + "&password=" + pwd, function (data, status) {
+                //    alert("Data: " + data + "\nStatus: " + status);
+                //});
+            }
+        }
+
+        function register() {
+            let email = "";
+            let firstname = "";
+            let lastname = "";
+            let gebDat = "";
+            let adress1 = "";
+            let adress2 = "";
+            let adress3 = "";
+            let pwd = "";
+            let pwdC = "";
+            email = document.getElementById("emailField").value;
+            firstname = document.getElementById("firstName").value;
+            lastname = document.getElementById("sureName").value;
+            gebDat = document.getElementById("gebDat").value;
+            adress1 = document.getElementById("addressOne").value;
+            adress2 = document.getElementById("addressTwo").value;
+            adress3 = document.getElementById("addressThree").value;
+            pwd = document.getElementById("passwordField").value;
+            pwdC = document.getElementById("passwordCheck").value;
+
+            if (email != "" && firstname != "" && lastname != "" && gebDat != "" && adress1 != "" && pwd != "" && pwdC != "") {
+                if (pwd == pwdC) {
+                    let obj = {
+                        FirstName: firstname,
+                        LastName: lastname,
+                        Email: email,
+                        DateofBirth: gebDat,
+                        AddressOne: adress1,
+                        AddressTwo: adress2,
+                        AddressThree: adress3,
+                        Password: pwd
+                    }
+                    console.log(JSON.stringify(obj));
+                } else {
+                    $("#registerButton").before("<p class='text-danger' id='errorMsg'>Die Passwörter stimmen nicht überein.</p>");
+                    $("#errorMsg").fadeOut(3000, function () {
+                        this.remove();
+                    });
+                }
+            }
         }
     </script>
 </body>

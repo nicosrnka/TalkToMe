@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: #00b7029c;
+    background-color: #87ff88f7;
 }
 
 .background-white {
@@ -49,4 +49,34 @@
 .card:hover {
     background-color: #f9ffbd !important;
     cursor: grab;
+}
+
+.cursor-grab {
+    cursor: grab;
+}
+
+.small-margin-bot{
+    margin-bottom:2px;
+}
+
+.custom-text-field {
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.no-border{
+    border:0 !important;
+}
+.overflow-scroll{
+    overflow:scroll;
+    max-height:300px;
 }

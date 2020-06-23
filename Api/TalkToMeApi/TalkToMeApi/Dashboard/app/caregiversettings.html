@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Talk to me - Pleger Einstellungen</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="../css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/site.css" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+        <img src="../img/svg/fhwn-logo.svg" class="img-fluid navbar-brand" />
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Übersicht <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appsettings.html">Einstellungen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="pinfosettings.html">Persönliche Informationen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pfleger Einstellungen</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container background-white mt-2">
+        <p class="h4 mb-4 text-center pt-3">Aktuelle Pfleger</p>
+        <ul id="list" class="list-group overflow-scroll">
+            <!--<li class="list-group-item no-border d-flex justify-content-between align-items-center">
+                <div>
+                    <input type="text" class="custom-text-field" placeholder="Alex meier" />
+                    <input type="text" class="custom-text-field" placeholder="066049921" />
+                </div>
+                <div>
+                    <i class="fas fa-trash mr-3 cursor-grab"></i>
+                    <i class="far fa-edit cursor-grab"></i>
+                </div>
+            </li>
+            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
+                <div>
+                    <input type="text" class="custom-text-field" placeholder="Nico Srnka" />
+                    <input type="text" class="custom-text-field" placeholder="066043321" />
+                </div>
+                <div>
+                    <i class="fas fa-trash mr-3 cursor-grab"></i>
+                    <i class="far fa-edit cursor-grab"></i>
+                </div>
+            </li>
+            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
+                <div>
+                    <input type="text" class="custom-text-field" placeholder="Maria Xander" />
+                    <input type="text" class="custom-text-field" placeholder="066044410" />
+                </div>
+                <div>
+                    <i class="fas fa-trash mr-3 cursor-grab"></i>
+                    <i class="far fa-edit cursor-grab"></i>
+                </div>
+            </li>
+            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
+                <div>
+                    <input type="text" class="custom-text-field" placeholder="Hannes Peter" />
+                    <input type="text" class="custom-text-field" placeholder="069918323" />
+                </div>
+                <div>
+                    <i class="fas fa-trash mr-3 cursor-grab"></i>
+                    <i class="far fa-edit cursor-grab"></i>
+                </div>
+            </li>
+            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
+                <div>
+                    <input type="text" class="custom-text-field" placeholder="Christian Indo" />
+                    <input type="text" class="custom-text-field" placeholder="069911278" />
+                </div>
+                <div>
+                    <i class="fas fa-trash mr-3 cursor-grab"></i>
+                    <i class="far fa-edit cursor-grab"></i>
+                </div>
+            </li>-->
+        </ul>
+        <!-- Default form register -->
+        <form class="text-center border no-border border-light pt-3 pb-3">
+
+            <p class="h4 mb-4">Pfleger hinzufügen</p>
+
+            <div class="form-row mb-4">
+                <div class="col">
+                    <!-- First name -->
+                    <input type="text" id="add_vn" class="form-control" placeholder="Vorname">
+                </div>
+                <div class="col">
+                    <!-- Last name -->
+                    <input type="text" id="add_nn" class="form-control" placeholder="Nachname">
+                </div>
+            </div>
+
+            <!-- E-mail -->
+            <input type="text" id="add_tf" class="form-control mb-4" placeholder="Telefonnummer">
+            <button type="button" id="changeButton" class="btn btn-info btn-block my-4" onclick="addCaregiver()">Pfleger hinzufügen</button>
+
+        </form>
+    </div>
+
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="../js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="../js/bootstrap.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="../js/mdb.js"></script>
+
+    <script>
+
+        getCaregiver();
+        function getCaregiver() {
+            let caregivers;
+            $.getJSON('https://localhost:5001/api/Caregiver/GetCaregivers?email=nico.srnka%40gmail.com')
+                .done(function (data) {
+                    console.log(data);
+                    caregivers = data;
+                    for (let care of caregivers) {
+                        $("#list").append("<li id='li_" + care.id + "' class='list-group-item no-border d-flex justify-content-between align-items-center'>" +
+                            " <div> " +
+                            "   <input id='fn_" + care.id + "' type='text' class='custom-text-field' value='" + care.firstName + "' />" +
+                            "   <input id='ln_" + care.id + "' type='text' class='custom-text-field' value='" + care.lastName + "' />" +
+                            "    <input id='pn_" + care.id + "' type='text' class='custom-text-field' value='" + care.phoneNumber + "' />" +
+                            " </div >" +
+                            "   <div>" +
+                            "       <i class='fas fa-trash mr-3 cursor-grab' onclick='removeCaregiver(" + care.id + ")'></i>" +
+                            "        <i class='far fa-edit cursor-grab' onclick='changeCaregiver(" + care.id + ")'></i>" +
+                            "     </div>" +
+                            "  </li>");
+                    }
+                }).fail(function (err) {
+
+                }).always(() => {
+                });
+        }
+
+        function changeCaregiver(id) {
+            console.log(id);
+            let obj = {
+                id: id,
+                firstName: document.getElementById("fn_" + id).value,
+                lastName: document.getElementById("ln_" + id).value,
+                phoneNumber: document.getElementById("pn_" + id).value
+            };
+            $.ajax({
+                type: "PUT",
+                url: 'https://localhost:5001/api/Caregiver/EditCaregiver',
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+                .done(function (data) {
+                    $("#li_" + id).remove();
+                })
+                .fail(function (request, status, err) {
+
+                });
+        }
+
+        function removeCaregiver(id) {
+            console.log(id);
+            $.ajax({
+                type: "DELETE",
+                url: 'https://localhost:5001/api/Caregiver/deleteCaregiver?id=' + id,
+               // data: JSON.stringify(id),
+                
+                //contentType: "application/json; charset=utf-8",
+                //dataType: "json"
+            })
+                .done(function (data) {
+                    $("#li_" + id).remove();
+                })
+                .fail(function (request, status, err) {
+                   
+                });
+        }
+
+        function addCaregiver() {
+            let obj = {
+                firstName: document.getElementById("add_vn").value,
+                lastName: document.getElementById("add_nn").value,
+                phoneNumber: document.getElementById("add_tf").value,
+                email: 'nico.srnka@gmail.com'
+            };
+            $.ajax({
+                type: "POST",
+                url: 'https://localhost:5001/api/Caregiver/AddCaregiver',
+                data: JSON.stringify(obj),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            })
+                .done(function (data) {
+                    let care = data;
+                    $("#list").append("<li id='li_" + care.id + "' class='list-group-item no-border d-flex justify-content-between align-items-center'>" +
+                        " <div> " +
+                        "   <input id='fn_" + care.id + "' type='text' class='custom-text-field' value='" + care.firstName + "' />" +
+                        "   <input id='ln_" + care.id + "' type='text' class='custom-text-field' value='" + care.lastName + "' />" +
+                        "    <input id='pn_" + care.id + "' type='text' class='custom-text-field' value='" + care.phoneNumber + "' />" +
+                        " </div >" +
+                        "   <div>" +
+                        "       <i class='fas fa-trash mr-3 cursor-grab' onclick='removeCaregiver(" + care.id + ")'></i>" +
+                        "        <i class='far fa-edit cursor-grab' onclick='changeCaregiver(" + care.id + ")'></i>" +
+                        "     </div>" +
+                        "  </li>");
+                })
+                .fail(function (request, status, err) {
+
+                });
+        }
+    </script>
+</body>
+</html>
