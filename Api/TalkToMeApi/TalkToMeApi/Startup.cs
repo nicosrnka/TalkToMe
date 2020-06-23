@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +28,17 @@ namespace TalkToMeApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllHeaders",
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
+                      });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,16 +49,35 @@ namespace TalkToMeApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors("AllowAllHeaders");
+
+
+
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthentication();
+          
+            //app.UseAuthentication();
+            //app.Map("/Dashboard/app", subApp => {
+            //    subApp.Use(async (context, next) =>
+            //    {
+            //        if (!context.User.Identity.IsAuthenticated)
+            //        {
+            //            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            //        }
+            //    });
+            //});
+
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
         }
+
     }
 }

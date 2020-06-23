@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TalkToMeApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TalkToMeApi.Controllers
 {
@@ -15,8 +19,9 @@ namespace TalkToMeApi.Controllers
     {
         private const string CONNSTRING = "server=localhost\\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.";
 
-        public LoginController() {
-        
+        public LoginController()
+        {
+
         }
 
         [HttpGet("login")]
@@ -32,7 +37,25 @@ namespace TalkToMeApi.Controllers
                 }
                 if (await db.ComparePasswordHash(password, person.Password))
                 {
-                    return Ok();
+                    //var claims = new List<Claim>()
+                    //{
+                    //new Claim(ClaimTypes.NameIdentifier, person.Id.ToString())
+                    //};
+                    //var authenticationOptions = new AuthenticationProperties()
+                    //{
+                    //    AllowRefresh = true,
+                    //    IsPersistent = true,
+                    //    IssuedUtc = DateTime.Now,
+                    //    ExpiresUtc = DateTime.Now.AddMinutes(20000)
+                    //    // RedirectUri = /dashboard
+                    //};
+
+                    //var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+                    //var claimPrincipal = new ClaimsPrincipal(claimsIdentity);
+
+                    //await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimPrincipal, authenticationOptions);
+                    return Ok(person.Id);
                 }
                 else
                 {
@@ -45,6 +68,22 @@ namespace TalkToMeApi.Controllers
             }
         }
 
+        //[HttpGet("logout")]
+        //[Authorize]
+        //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    try
+        //    {
+        //        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500);
+        //    }
+        //}
+
         [HttpPost("register")]
         public async Task<IActionResult> Register(PersonModel person)
         {
@@ -52,7 +91,8 @@ namespace TalkToMeApi.Controllers
             {
                 using var db = new TalkToMeContext(CONNSTRING);
 
-                var p = new Person {
+                var p = new Person
+                {
                     FirstName = person.FirstName,
                     LastName = person.LastName,
                     AddressOne = person.AddressOne,
