@@ -8,4 +8,7 @@
     <string name="firstname">Vorname</string>
     <string name="lastname">Nachname</string>
     <string name="save">Speichern</string>
+    <string name="add_ip_text">TV IP-Adresse hinzufügen</string>
+    <string name="ip_address">IP-Adresse</string>
+    <string name="automatic">Automatisch</string>
 </resources>

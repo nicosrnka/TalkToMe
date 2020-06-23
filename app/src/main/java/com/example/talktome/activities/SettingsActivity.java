@@ -24,4 +24,9 @@ public class SettingsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EditCaregivers.class);
         startActivity(intent);
     }
+
+    public void gotoAddIPSetting(View view) {
+        Intent intent = new Intent(this, AddIp.class);
+        startActivity(intent);
+    }
 }
