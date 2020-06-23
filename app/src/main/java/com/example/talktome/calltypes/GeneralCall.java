@@ -1,8 +1,10 @@
 package com.example.talktome.calltypes;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -11,14 +13,21 @@ import com.example.talktome.helper.MessageSpeaker;
 import com.example.talktome.models.CaregiverModel;
 import com.example.talktome.models.ContactModel;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.ContentResolver;
+
 public class GeneralCall {
     Context appContext;
+
+    public Context getAppContext(){
+        return this.appContext;
+    }
 
     public GeneralCall(Context context) {
         appContext = context;
@@ -118,5 +127,24 @@ public class GeneralCall {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setData(Uri.parse("tel:" + internationalizePhonenumber(contactModel.mobileNumber)));
         appContext.startActivity(i);
+    }
+
+    public List<String> getContactNames() {
+
+        ArrayList<String> contactNames = new ArrayList<>();
+
+        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+        Uri uriContact = intent.getData();
+
+        Cursor cursor = this.appContext.getContentResolver().query(uriContact, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+
+            contactNames.add(cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME)));
+        }
+
+        cursor.close();
+
+        return contactNames;
     }
 }

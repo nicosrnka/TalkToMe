@@ -54,7 +54,7 @@ public class WhatsAppCall extends GeneralCall {
         return contacts;
     }
 
-    protected List<ContactModel> getContactsByName(String searchString) {
+    public List<ContactModel> getContactsByName(String searchString) {
         List<ContactModel> contacts = new ArrayList<>();
         ContentResolver resolver = appContext.getContentResolver();
         Cursor cursor = resolver.query(
@@ -79,7 +79,7 @@ public class WhatsAppCall extends GeneralCall {
         return contacts;
     }
 
-    protected void callContact(@NotNull ContactModel contactModel) {
+    public void callContact(@NotNull ContactModel contactModel) {
         if (contactModel.mimeType.equals("vnd.android.cursor.item/vnd.com.whatsapp.voip.call")) {
             Intent i = new Intent();
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
