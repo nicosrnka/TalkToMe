@@ -53,7 +53,7 @@ namespace TalkToMeApi
 
 
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
