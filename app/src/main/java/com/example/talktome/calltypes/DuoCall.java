@@ -18,7 +18,7 @@ public class DuoCall extends GeneralCall {
         Intent i = new Intent("com.google.android.apps.tachyon.action.CALL");
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.setPackage("com.google.android.apps.tachyon");
-        i.setData(Uri.parse("tel:" + internationalizePhonenumber(caregiver.phonenumber)));
+        i.setData(Uri.parse("tel:" + internationalizePhonenumber(caregiver.getPhoneNumber())));
         appContext.startActivity(i);
     }
 

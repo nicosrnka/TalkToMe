@@ -2,7 +2,7 @@
     <string name="app_name">TalkToMe</string>
     <string name="settings_button_content_description">Settings Button</string>
     <string name="add_caregiver_text">Pfleger hinzufügen</string>
-    <string name="edit_caregiver_text">Pfleger bearbeiten</string>
+    <string name="edit_caregiver_text">Pfleger Anzeigen</string>
     <string name="add">Hinzufügen</string>
     <string name="phone">Telefon</string>
     <string name="firstname">Vorname</string>

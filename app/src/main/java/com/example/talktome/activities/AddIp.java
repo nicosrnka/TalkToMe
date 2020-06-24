@@ -1,7 +1,10 @@
 package com.example.talktome.activities;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,5 +75,21 @@ public class AddIp extends AppCompatActivity {
             }
         }
         return "";
+    }
+
+    public void SaveButton(View view){
+        //GET IP FROM STORAGE
+        // SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(AddCaregiver.this); hier richtige <klasse>.this
+        //        String ip = pref.getString("ip", "");
+        //
+        if(ipField.getText().toString() != ""){
+            SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(AddIp.this);
+            SharedPreferences.Editor editor = myPreferences.edit();
+            editor.putString("ip", ipField.getText().toString());
+            editor.commit();
+        }else{
+            Toast.makeText(getApplicationContext(), "Füllen Sie das Ip Feld aus!", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

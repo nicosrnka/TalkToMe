@@ -2,11 +2,15 @@ package com.example.talktome.activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.example.talktome.activities.JsonApi;
 import com.example.talktome.R;
 import com.example.talktome.models.AddACaregiver;
@@ -49,9 +53,8 @@ public class AddCaregiver extends AppCompatActivity {
 
     }
     private void sendToApi(){
-        SharedPreferences pref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(AddCaregiver.this);
         String em = pref.getString("email", "");
-        em = "nico.srnka@gmail.com";
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:5000/api/Caregiver/").addConverterFactory(GsonConverterFactory.create()).build();
         AddACaregiver c = new AddACaregiver(FirstName.getText().toString(), LastName.getText().toString(), PhoneNumber.getText().toString(), em);
         JsonApi jsonApi = retrofit.create(JsonApi.class);
@@ -62,10 +65,28 @@ public class AddCaregiver extends AppCompatActivity {
             public void onResponse(Call<AddACaregiver> call, Response<AddACaregiver> response) {
                 if(response.isSuccessful()){
                     {
+                        FirstName.setText("");
+                        LastName.setText("");
+                        PhoneNumber.setText("");
                         System.out.println("Passt");
+                        Context context = getApplicationContext();
+                        CharSequence text = "Hinzugefügt!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                       // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.show();
                     }
                 }else{
                     {
+                       // Toast.makeText(AddCaregiver.this, "Fehler beim Hinzufügen!", Toast.LENGTH_SHORT).show();
+                        Context context = getApplicationContext();
+                        CharSequence text = "Fehler beim Hinzufügen!";
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        // toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                        toast.show();
                         System.out.println(response.code());
                         System.out.println("passt ned");
                     }
