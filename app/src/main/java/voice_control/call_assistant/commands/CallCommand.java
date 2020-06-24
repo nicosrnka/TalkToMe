@@ -30,8 +30,12 @@ public class CallCommand implements ICommand {
         //GeneralCall generalCall = new GeneralCall(this.context);
         //generalCall.tryCallingName(this.getParameter());
 
+        //this.message = this.parameter + " wird angerufen";
+        this.message = "";
+
         this.workingSpace.setCurrentContactName((String) this.getParameter());
         this.workingSpace.requestCall();
+
     }
 
     @Override

@@ -19,9 +19,12 @@ public class WhatsAppCallIntent extends Intent {
 
     private Context context;
 
+    private ICommand command;
+
     public WhatsAppCallIntent(@NotNull ICommand command, @NotNull Context context) {
         super(command);
         this.context = context;
+        this.command = command;
     }
 
     @Override
@@ -34,20 +37,28 @@ public class WhatsAppCallIntent extends Intent {
     @Override
     protected void extractParameters(String formulation) throws Exception {
 
-        // In order to get searched contact.
+        formulation = formulation.toLowerCase();
+
         GeneralCall gc = new GeneralCall(this.context);
+        WhatsAppCall whatsAppCall = new WhatsAppCall(this.context);
 
-        // Get contact to call from formulation.
-        for (String contact: gc.getContactNames()) {
-            if(formulation.contains(contact)){
+        for (String contact : gc.getContactNames()) {
+            {
+                contact = contact.toLowerCase();
 
-                WhatsAppCall whatsAppCall = new WhatsAppCall(this.context);
-
-                ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
-
-                this.setParameters(contactToCall);
-
-                return;
+                if (formulation.contains(contact)) {
+                    ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
+                    this.command.setParameter(contactToCall);
+                    return;
+                } else if (formulation.contains(contact.split(" ")[0])) {
+                    ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
+                    this.command.setParameter(contactToCall);
+                    return;
+                } else if ((contact.split(" ").length > 1) && (formulation.contains(contact.split(" ")[1]))) {
+                    ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
+                    this.command.setParameter(contactToCall);
+                    return;
+                }
             }
         }
 
