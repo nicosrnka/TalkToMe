@@ -21,7 +21,7 @@ public class WhatsAppCall extends GeneralCall {
     }
 
     public void callCaregiver(@NotNull CaregiverModel caregiver) {
-        List<ContactModel> contacts = getContactByNumber(caregiver.phonenumber);
+        List<ContactModel> contacts = getContactByNumber(caregiver.getPhoneNumber());
         if (contacts.size() == 1) {
             callContact(contacts.get(0));
         }

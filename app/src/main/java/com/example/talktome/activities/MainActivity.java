@@ -12,14 +12,21 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.talktome.R;
+import com.example.talktome.models.AddACaregiver;
+import com.example.talktome.models.LoginReturn;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.Console;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-               // validate(Email.getText().toString(), Password.getText().toString());
-                openActivity();
+                validate(Email.getText().toString(), Password.getText().toString());
+               // openActivity();
             }
         });
     }
@@ -54,23 +61,35 @@ public class MainActivity extends AppCompatActivity {
         }else{
             System.out.println(email);
             System.out.println(password);
-            OkHttpClient client = new OkHttpClient();
-            String url = "http://10.0.2.1:5000/api/Login/Login?email=" + email + "&password=" + password;
-            System.out.println(url);
-            Request request = new Request.Builder().url(url).build();
-            client.newCall(request).enqueue(new Callback() {
+            Retrofit retrofit = new Retrofit.Builder().baseUrl("http://10.0.2.2:5000/api/Login/").addConverterFactory(GsonConverterFactory.create()).build();
+           // AddACaregiver c = new AddACaregiver(FirstName.getText().toString(), LastName.getText().toString(), PhoneNumber.getText().toString(), em);
+            JsonApi jsonPlaceholder = retrofit.create(JsonApi.class);
+            Map<String, String> params = new HashMap<String, String>();
+            params.put("email", email);
+            params.put("password", password);
+            Call<Integer> call = jsonPlaceholder.getLogin(params);
+            call.enqueue(new Callback<Integer>() {
                 @Override
-                public void onFailure(Call call, IOException e) {
-                    System.out.println("Fail");
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
                     if(response.isSuccessful()){
-                        System.out.println(response.body().toString());
+                        showSuccessDialog();
+                        SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                        SharedPreferences.Editor editor = myPreferences.edit();
+                        editor.putBoolean("login", true);
+                        editor.putInt("id", response.body().intValue());
+                        editor.putString("email", email);
+                        editor.commit();
+                        System.out.println("Body: " + response.body().intValue());
+
+                        System.out.println("geht");
                     }else{
-                        System.out.println(response.body().toString());
+                        showFailDialog();
+                        System.out.println("ned");
                     }
+                }
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+
                 }
             });
         }

@@ -1,6 +1,8 @@
 package com.example.talktome.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +29,15 @@ public class SettingsActivity extends AppCompatActivity {
 
     public void gotoAddIPSetting(View view) {
         Intent intent = new Intent(this, AddIp.class);
+        startActivity(intent);
+    }
+
+    public void Logout(View view){
+        SharedPreferences myPreferences = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
+        SharedPreferences.Editor editor = myPreferences.edit();
+        editor.putBoolean("login", false);
+        editor.commit();
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
