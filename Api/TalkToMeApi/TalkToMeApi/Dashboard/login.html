@@ -163,6 +163,22 @@
                         AddressThree: adress3,
                         Password: pwd
                     }
+                    $.ajax({
+                        type: "POST",
+                        url: 'https://localhost:5001/api/Login/register',
+                        data: JSON.stringify(obj),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    })
+                        .done(function (data) {
+                            window.location.href = window.location.href.replace("login.html", "app/index.html");
+                            console.log("done");
+                        })
+                        .fail(function (request, status, err) {
+                            window.location.href = window.location.href.replace("login.html", "app/index.html");
+                            console.log("fail");
+                        });
+
                     console.log(JSON.stringify(obj));
                 } else {
                     $("#registerButton").before("<p class='text-danger' id='errorMsg'>Die Passwörter stimmen nicht überein.</p>");
