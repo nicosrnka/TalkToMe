@@ -172,9 +172,11 @@
                     })
                         .done(function (data) {
                             window.location.href = window.location.href.replace("login.html", "app/index.html");
+                            console.log("done");
                         })
                         .fail(function (request, status, err) {
-
+                            window.location.href = window.location.href.replace("login.html", "app/index.html");
+                            console.log("fail");
                         });
 
                     console.log(JSON.stringify(obj));
