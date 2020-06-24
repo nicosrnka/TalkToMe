@@ -1,6 +1,5 @@
 package com.example.talktome.activities;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
@@ -27,6 +26,9 @@ public class AddIp extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ip);
         ipField = findViewById(R.id.ip_text_input_edit_text);
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(AddIp.this);
+        String ip = pref.getString("ip", "");
+        ipField.setText(ip);
     }
 
     public void automaticIp(final View view) {
@@ -36,25 +38,12 @@ public class AddIp extends AppCompatActivity {
         final DhcpInfo dhcp = manager.getDhcpInfo();
         final String gateway = Formatter.formatIpAddress(dhcp.gateway);
 
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                final String iplocal = portScan(gateway);
-                if (iplocal.isEmpty()) {
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), "TV konnte nicht gefunden werden.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                } else {
-                    view.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            ipField.setText(iplocal);
-                        }
-                    });
-                }
+        Runnable runnable = () -> {
+            final String iplocal = portScan(gateway);
+            if (iplocal.isEmpty()) {
+                view.post(() -> Toast.makeText(getApplicationContext(), "TV konnte nicht gefunden werden.", Toast.LENGTH_SHORT).show());
+            } else {
+                view.post(() -> ipField.setText(iplocal));
             }
         };
         new Thread(runnable).start();
@@ -67,7 +56,7 @@ public class AddIp extends AppCompatActivity {
                 Socket socket = new Socket();
                 SocketAddress address = new InetSocketAddress(ip, 1925);
                 try {
-                    socket.connect(address, 10);
+                    socket.connect(address, 50);
                     socket.close();
                     return ip;
                 } catch (Exception ex) {
@@ -77,7 +66,7 @@ public class AddIp extends AppCompatActivity {
         return "";
     }
 
-    public void SaveButton(View view){
+    public void saveIp(View view){
         //GET IP FROM STORAGE
         // SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(AddCaregiver.this); hier richtige <klasse>.this
         //        String ip = pref.getString("ip", "");
@@ -87,7 +76,8 @@ public class AddIp extends AppCompatActivity {
             SharedPreferences.Editor editor = myPreferences.edit();
             editor.putString("ip", ipField.getText().toString());
             editor.commit();
-        }else{
+            Toast.makeText(getApplicationContext(), "IP erfolgreich hinzugefügt!", Toast.LENGTH_SHORT).show();
+        } else {
             Toast.makeText(getApplicationContext(), "Füllen Sie das Ip Feld aus!", Toast.LENGTH_SHORT).show();
         }
 

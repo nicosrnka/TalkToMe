@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:onClick="saveIp"
         android:text="@string/add"
         app:layout_constraintEnd_toStartOf="@+id/setting_automatic_ip_button"
         app:layout_constraintStart_toStartOf="parent"
