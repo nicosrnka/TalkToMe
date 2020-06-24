@@ -34,6 +34,7 @@ public class GeneralCall {
     }
 
     public void tryCallingName(String name) {
+
         List<ContactModel> contacts = this.getContactsByName(name);
         try {
             this.handleContactList(contacts);

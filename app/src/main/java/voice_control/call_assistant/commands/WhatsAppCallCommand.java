@@ -3,7 +3,12 @@ package voice_control.call_assistant.commands;
 import android.content.Context;
 import android.view.contentcapture.ContentCaptureCondition;
 
+import com.example.talktome.activities.WorkingSpace;
+import com.example.talktome.calltypes.CallRequester;
+import com.example.talktome.calltypes.CallTypes;
+import com.example.talktome.calltypes.DuoCall;
 import com.example.talktome.calltypes.WhatsAppCall;
+import com.example.talktome.models.CaregiverModel;
 import com.example.talktome.models.ContactModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -17,15 +22,29 @@ public class WhatsAppCallCommand implements ICommand {
 
     private Context context;
 
-    public WhatsAppCallCommand(@NotNull Context context)
+    private WorkingSpace workingSpace;
+
+    public WhatsAppCallCommand(@NotNull Context context, @NotNull WorkingSpace workingSpace)
     {
         this.context = context;
+        this.workingSpace = workingSpace;
     }
 
     @Override
     public void execute() {
-        WhatsAppCall whatsAppCall = new WhatsAppCall(this.context);
-        whatsAppCall.callContact((ContactModel) this.getParameter());
+
+        this.message = " ";
+
+        try{
+            WhatsAppCall whatsAppCall = new WhatsAppCall(this.context);
+            whatsAppCall.callCaregiver((CaregiverModel) this.getParameter());
+        }
+        catch (Exception e) {
+            CallRequester callRequester = new CallRequester(this.context, this.workingSpace);
+            callRequester.setCurrentCallType(CallTypes.WhatsApp);
+            callRequester.setCurrentContactName((String) this.getParameter());
+            callRequester.requestCall();
+        }
     }
 
     @Override

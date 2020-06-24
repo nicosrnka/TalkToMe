@@ -36,27 +36,22 @@ public class WhatsAppCallIntent extends Intent {
 
     @Override
     protected void extractParameters(String formulation) throws Exception {
-
         formulation = formulation.toLowerCase();
 
         GeneralCall gc = new GeneralCall(this.context);
-        WhatsAppCall whatsAppCall = new WhatsAppCall(this.context);
 
         for (String contact : gc.getContactNames()) {
             {
                 contact = contact.toLowerCase();
 
                 if (formulation.contains(contact)) {
-                    ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
-                    this.command.setParameter(contactToCall);
+                    this.command.setParameter(contact);
                     return;
                 } else if (formulation.contains(contact.split(" ")[0])) {
-                    ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
-                    this.command.setParameter(contactToCall);
+                    this.command.setParameter(contact);
                     return;
                 } else if ((contact.split(" ").length > 1) && (formulation.contains(contact.split(" ")[1]))) {
-                    ContactModel contactToCall = whatsAppCall.getContactsByName(contact).get(0);
-                    this.command.setParameter(contactToCall);
+                    this.command.setParameter(contact);
                     return;
                 }
             }

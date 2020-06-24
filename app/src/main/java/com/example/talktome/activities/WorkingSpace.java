@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import voice_control.commands.ICommand;
 import voice_control.smallTalk_assistant.SmallTalkAssistant;
 import voice_control.speechRecognizer.AdvancedRecognitionListener;
 import voice_control.speechRecognizer.AdvancedSpeechRecognizer;
+import voice_control.tvcontrol_assistant.TvControlAssistant;
 
 import android.content.Context;
 
@@ -42,11 +44,17 @@ public class WorkingSpace extends AppCompatActivity {
     private CallAssistant callAssistant;
 
     private static final int PERMISSIONS_REQUEST = 100;
+
     private String currentContactName;
-    private CallTypes currentCallType;
 
     public void setCurrentContactName(String contactName){
         this.currentContactName = contactName;
+    }
+
+    private CallTypes currentCallType;
+
+    public void setCurrentCallType(CallTypes callType) {
+        this.currentCallType = callType;
     }
 
     private TextView textViewR;
@@ -66,7 +74,7 @@ public class WorkingSpace extends AppCompatActivity {
         Context context = textViewR.getContext();
 
         this.callAssistant = new CallAssistant(context, this, null); // emergency caregiver must not be null
-        this.voiceControl = new VoiceControl(new IAssistant[] {this.callAssistant, new SmallTalkAssistant()});
+        this.voiceControl = new VoiceControl(new IAssistant[] {this.callAssistant, new SmallTalkAssistant(), new TvControlAssistant(context)});
 
         this.speechListner = new AdvancedSpeechRecognizer(context, this);
         this.speechListner.start();
@@ -78,11 +86,12 @@ public class WorkingSpace extends AppCompatActivity {
     }
 
     public void requestCall() {
+
         if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
                 || checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE}, PERMISSIONS_REQUEST);
         } else {
-            GeneralCall call = CallFactory.getCall(currentCallType, getApplicationContext());
+            GeneralCall call = CallFactory.getCall(currentCallType, this.getApplicationContext());
             call.tryCallingName(currentContactName);
         }
     }
