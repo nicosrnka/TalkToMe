@@ -3,7 +3,9 @@ package com.example.talktome.activities;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.speech.RecognizerIntent;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telecom.Call;
@@ -69,6 +71,12 @@ public class WorkingSpace extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_working_space);
+
+        ConstraintLayout cL = findViewById(R.id.activity_working_space);
+        AnimationDrawable aD = (AnimationDrawable) cL.getBackground();
+        aD.setEnterFadeDuration(2000);
+        aD.setExitFadeDuration(4000);
+        aD.start();
 
         textViewR = (TextView) findViewById(R.id.txvResult);
 

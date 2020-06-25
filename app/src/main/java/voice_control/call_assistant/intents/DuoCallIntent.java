@@ -32,6 +32,12 @@ public class DuoCallIntent extends Intent {
     protected void setDefaultKeywords() {
         this.setKeywords(new String[]{
                 "duo",
+                "du o",
+                "uhu",
+                "duu",
+                "douro",
+                "duwo",
+                "perdu"
         });
     }
 
