@@ -16,82 +16,77 @@ public class Philips implements TVControl{
     }
 
     @Override
-    public boolean VolumeUp() {
-        return sendCommand("VolumeUp");
+    public void VolumeUp() {
+        sendCommand("VolumeUp");
     }
 
     @Override
-    public boolean VolumeDown() {
-        return sendCommand("VolumeDown");
+    public void VolumeDown() {
+        sendCommand("VolumeDown");
     }
 
     @Override
-    public boolean ChannelUp() {
-        return sendCommand("ChannelStepUp");
+    public void ChannelUp() {
+        sendCommand("ChannelStepUp");
     }
 
     @Override
-    public boolean ChannelDown() {
-        return sendCommand("ChannelStepDown");
+    public void ChannelDown() {
+        sendCommand("ChannelStepDown");
     }
 
     @Override
-    public boolean Mute() {
-        return sendCommand("Mute");
-    }
-
-    public boolean Home() {
-        return sendCommand("Home");
+    public void Mute() {
+        sendCommand("Mute");
     }
 
     @Override
-    public boolean Options() {
-        return sendCommand("Options");
+    public void Home() {
+        sendCommand("Home");
     }
 
     @Override
-    public boolean Shutdown() {
-        return sendCommand("Standby");
+    public void Options() {
+        sendCommand("Options");
     }
 
     @Override
-    public boolean Info() {
-        return sendCommand("Info");
+    public void Shutdown() {
+        sendCommand("Standby");
     }
 
     @Override
-    public boolean sendCommand(String command){
-        boolean result = false;
-        try {
-            URL url = new URL("http://" + address + ":1925/1/input/key");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-            conn.setDoInput(true);
+    public void Info() {
+        sendCommand("Info");
+    }
 
-            JSONObject jsonParam = new JSONObject();
-            jsonParam.put("key", command);
+    @Override
+    public void sendCommand(String command){
 
-            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-            os.writeBytes(jsonParam.toString());
+        Runnable runnable = () -> {
+            try {
+                URL url = new URL("http://" + address + ":1925/1/input/key");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestProperty("Accept", "application/json");
+                conn.setDoOutput(true);
+                conn.setDoInput(true);
 
-            os.flush();
-            os.close();
+                JSONObject jsonParam = new JSONObject();
+                jsonParam.put("key", command);
 
-            if (conn.getResponseCode() == 200) {
-                result = true;
+                DataOutputStream os = new DataOutputStream(conn.getOutputStream());
+                os.writeBytes(jsonParam.toString());
+
+                os.flush();
+                os.close();
+
+                conn.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            Log.i("MSG", conn.getResponseMessage());
-
-            conn.disconnect();
-            return result;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
+        };
+        new Thread(runnable).start();
     }
 }
