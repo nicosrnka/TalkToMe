@@ -16,6 +16,7 @@ import com.example.talktome.activities.SettingsActivity;
 import com.example.talktome.calltypes.CallFactory;
 import com.example.talktome.calltypes.CallTypes;
 import com.example.talktome.calltypes.GeneralCall;
+import com.example.talktome.helper.GetCaregiverFromBackend;
 import com.example.talktome.helper.MessageSpeaker;
 import com.example.talktome.models.CaregiverModel;
 
@@ -73,11 +74,18 @@ public class WorkingSpace extends AppCompatActivity {
 
         Context context = textViewR.getContext();
 
-        this.callAssistant = new CallAssistant(context, this, null); // emergency caregiver must not be null
+        GetCaregiverFromBackend getCaregiverFromBackend = new GetCaregiverFromBackend(this.getApplicationContext());
+        if(getCaregiverFromBackend.GetCaregiver().isEmpty())
+        {
+            this.callAssistant = new CallAssistant(context, this, null);
+        }
+        else{
+            this.callAssistant = new CallAssistant(context, this, getCaregiverFromBackend.GetCaregiver().get(0));
+        }
         this.voiceControl = new VoiceControl(new IAssistant[] {this.callAssistant, new SmallTalkAssistant(), new TvControlAssistant(context)});
 
-        this.speechListner = new AdvancedSpeechRecognizer(context, this);
-        this.speechListner.start();
+        //this.speechListner = new AdvancedSpeechRecognizer(context, this);
+        //this.speechListner.start();
     }
 
     public void gotoSettings(View view) {
@@ -126,7 +134,7 @@ public class WorkingSpace extends AppCompatActivity {
             this.handleSpeechInput(result.get(0));
         }
     }
-
+/*
     public void handleText(View view)
     {
         TextView textView = (TextView) findViewById(R.id.usertest_textinput);
@@ -134,7 +142,7 @@ public class WorkingSpace extends AppCompatActivity {
 
         this.handleSpeechInput(input);
     }
-
+*/
     // Process speech input threw voice control and reads the message aloud.
     public void handleSpeechInput(String formulation){
 

@@ -130,6 +130,13 @@ public class GeneralCall {
         appContext.startActivity(i);
     }
 
+    public void callPerNumber(String number){
+        Intent i = new Intent(Intent.ACTION_CALL);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        i.setData(Uri.parse("tel:" + internationalizePhonenumber(number)));
+        appContext.startActivity(i);
+    }
+
     public List<String> getContactNames() {
         ContentResolver contentResolver = this.appContext.getContentResolver();
         Cursor cur = contentResolver.query(ContactsContract.Contacts.CONTENT_URI,

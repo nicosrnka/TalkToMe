@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.talktome.calltypes.GeneralCall;
 import com.example.talktome.calltypes.WhatsAppCall;
+import com.example.talktome.helper.GetCaregiverFromBackend;
+import com.example.talktome.models.CaregiverModel;
 import com.example.talktome.models.ContactModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -54,6 +56,20 @@ public class WhatsAppCallIntent extends Intent {
                     this.command.setParameter(contact);
                     return;
                 }
+            }
+        }
+
+        GetCaregiverFromBackend getCaregiverFromBackend = new GetCaregiverFromBackend(this.context);
+        List<CaregiverModel> caregiverModels = getCaregiverFromBackend.GetCaregiver();
+
+        for(CaregiverModel caregiverModel: caregiverModels) {
+            if(formulation.contains(caregiverModel.getLastName().toLowerCase())){
+                this.command.setParameter(caregiverModel);
+                return;
+            }
+            else if(formulation.contains(caregiverModel.getFirstName().toLowerCase())){
+                this.command.setParameter(caregiverModel);
+                return;
             }
         }
 

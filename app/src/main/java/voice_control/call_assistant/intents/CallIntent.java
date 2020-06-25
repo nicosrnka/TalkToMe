@@ -4,6 +4,7 @@ import android.content.Context;
 import android.telecom.Call;
 
 import com.example.talktome.calltypes.GeneralCall;
+import com.example.talktome.helper.GetCaregiverFromBackend;
 import com.example.talktome.models.CaregiverModel;
 import com.example.talktome.models.ContactModel;
 
@@ -61,8 +62,8 @@ public class CallIntent extends Intent {
             }
         }
 
-        // Must be changed.
-        List<CaregiverModel> caregiverModels = new ArrayList<CaregiverModel>();
+        GetCaregiverFromBackend getCaregiverFromBackend = new GetCaregiverFromBackend(this.context);
+        List<CaregiverModel> caregiverModels = getCaregiverFromBackend.GetCaregiver();
 
         for(CaregiverModel caregiverModel: caregiverModels) {
             if(formulation.contains(caregiverModel.getLastName().toLowerCase())){

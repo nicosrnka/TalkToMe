@@ -58,7 +58,7 @@ public class CallAssistant extends Assistant
                 new WhatsAppCallIntent(new WhatsAppCallCommand(context, this.workingSpace), context),
                 new CallIntent(new CallCommand(context, this.workingSpace), context),
                 new DuoCallIntent(new DuoCallCommand(context, this.workingSpace), context),
-                new ImergencyIntent(new ImergencyCallCommand(context, this.emergencyCaregiver))
+                new ImergencyIntent(new ImergencyCallCommand(context, this.emergencyCaregiver), context)
         };
     }
 }

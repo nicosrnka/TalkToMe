@@ -1,6 +1,7 @@
 package voice_control.call_assistant.commands;
 
 import android.content.Context;
+import android.support.annotation.VisibleForTesting;
 
 import com.example.talktome.activities.WorkingSpace;
 import com.example.talktome.calltypes.CallRequester;
@@ -20,7 +21,7 @@ public class ImergencyCallCommand implements ICommand {
 
     private WorkingSpace workingSpace;
 
-    public ImergencyCallCommand(@NotNull Context context, @NotNull CaregiverModel caregiverForEmergency)
+    public ImergencyCallCommand(@NotNull Context context, CaregiverModel caregiverForEmergency)
     {
         this.context = context;
         this.parameter = caregiverForEmergency;
@@ -30,13 +31,19 @@ public class ImergencyCallCommand implements ICommand {
     public void execute() {
 
         GeneralCall generalCall = new GeneralCall(this.context);
-        generalCall.callCaregiver((CaregiverModel) this.getParameter());
+
+        try {
+            generalCall.callCaregiver((CaregiverModel) this.getParameter());
+        }
+        catch (Exception e) {
+            generalCall.callPerNumber((String) this.getParameter());
+        }
     }
 
     @Override
     public String getMessage() {
 
-        return "Hilferuf";
+        return "Hilferuf abgesetzt";
     }
 
     @Override
