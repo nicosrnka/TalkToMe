@@ -21,6 +21,7 @@
         <activity android:name=".activities.EditCaregivers" />
         <activity android:name=".activities.AddCaregiver" />
         <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".activities.SmartViewHelper" />
         <activity android:name=".activities.WorkingSpace">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

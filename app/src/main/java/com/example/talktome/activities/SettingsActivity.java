@@ -22,6 +22,11 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public  void goToSmartViewHelper(View view) {
+        Intent intent = new Intent(this, SmartViewHelper.class);
+        startActivity(intent);
+    }
+
     public void gotoEditCaregiversSetting(View view) {
         Intent intent = new Intent(this, EditCaregivers.class);
         startActivity(intent);

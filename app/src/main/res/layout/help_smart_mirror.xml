@@ -18,11 +18,9 @@
 
         <TableRow>
     <TextView
-        android:layout_width="300dp"
-        android:layout_height="43dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text=" Zum Aktivieren der SmartView (Hisense)"
-        tools:layout_editor_absoluteX="37dp"
-        tools:layout_editor_absoluteY="16dp"
         tools:fontFamily="sans-serif-condensed-medium"
         tools:textStyle="bold"
         tools:textSize="24dp"
@@ -34,9 +32,9 @@
             <TextView
                 android:id="@+id/First_Element"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="1. Zum Aktivieren der Smart View laden Sie bitte \n folgende App im Google Play Store hinunter: \n Smart View TV All Share Cast und Video TV cast."
-                tools:textSize="19dp" />
+                android:layout_height="wrap_content"
+                android:text="1. Zum Aktivieren der Smart View laden Sie bitte folgende App im Google Play Store hinunter: Smart View TV All Share Cast und Video TV cast."
+                tools:textSize="24dp" />
         </TableRow>
         <TableRow>
 
@@ -49,21 +47,18 @@
         </TableRow>
         <TableRow>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:text="2. Drehen Sie nun den Fernsehen an"
-            tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="252dp"
-            tools:textSize="19dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Schalten Sie nun den Fernsehen ein"
+            tools:textSize="24dp" />
         </TableRow>
         <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:text="3. Drücken Sie nun auf den Home-Button wie unten \n angezeigt:"
-            tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="252dp"
-            tools:textSize="19dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. Drücken Sie nun auf den Home-Button wie unten \n angezeigt:"
+                tools:textSize="24dp" />
         </TableRow>
 
         <TableRow android:layout_width="278dp">
@@ -76,13 +71,12 @@
                 tools:layout_editor_absoluteY="142dp" />
         </TableRow>
         <TableRow>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="115dp"
-            android:text="4. Danach gehen Sie auf das Tür Symbol (unten links), wie in der Abbildung angezeigt, und wechseln Sie dann in die Anyview Cast. Dadurch ist Ihr Hisense Fernseher dann bereit für den Smart View Share."
-            tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="252dp"
-            tools:textSize="19dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4. Danach gehen Sie auf das Tür Symbol (unten links), wie in der Abbildung angezeigt, und wechseln Sie dann in die Anyview Cast. Dadurch ist Ihr Hisense Fernseher dann bereit für den Smart View Share."
+                tools:textSize="24dp" />
         </TableRow>
         <TableRow>
         <ImageView
@@ -95,12 +89,10 @@
         <TableRow>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5. Danach wechseln Sie in die App, die Sie vorher hinuntergeladen haben. Drücken Sie in der App auf den Startknopf(wie unten in der Abbildung)"
-                tools:layout_editor_absoluteX="23dp"
-                tools:layout_editor_absoluteY="252dp"
-                tools:textSize="19dp" />
+                tools:textSize="24dp" />
         </TableRow>
         <TableRow>
         <ImageView
@@ -112,12 +104,10 @@
         </TableRow>
         <TableRow>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="6. Danach befinden Sie sich im Hauptfenster der App."
-            tools:layout_editor_absoluteX="23dp"
-            tools:layout_editor_absoluteY="252dp"
-            tools:textSize="19dp" />
+            tools:textSize="24dp" />
         </TableRow>
         <TableRow>
         <ImageView
@@ -130,12 +120,10 @@
         <TableRow>
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="125dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="7. Dannach wählen Sie Ihren Fernseher aus und klicken Sie darauf. Daraufhin wird sich das Handy mit dem Smart TV verbinden. Bitte achten Sie darauf, dass Handy und Smart TV mit dem gleichen Netzwerk verbunden sind. "
-                tools:layout_editor_absoluteX="23dp"
-                tools:layout_editor_absoluteY="252dp"
-                tools:textSize="19dp" />
+                tools:textSize="24dp" />
         </TableRow>
         <TableRow>
         <ImageView
@@ -147,19 +135,6 @@
         </TableRow>
         <TableRow>
         <TextView />
-        </TableRow>
-        <TableRow>
-        <Button
-            android:id="@+id/setting_add_caregiver_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="Zurück zum Hauptfenster"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="648dp" />
         </TableRow>
     </TableLayout>
     </ScrollView>
