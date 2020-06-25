@@ -14,6 +14,7 @@ public class OptionsIntent extends Intent {
     protected void setDefaultKeywords() {
         this.setKeywords(new String[]{
                 "options",
+                "optionen"
         });
     }
 }

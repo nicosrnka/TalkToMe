@@ -5,6 +5,8 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import java.io.DataOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -62,7 +64,6 @@ public class Philips implements TVControl{
 
     @Override
     public void sendCommand(String command){
-
         Runnable runnable = () -> {
             try {
                 URL url = new URL("http://" + address + ":1925/1/input/key");
@@ -81,6 +82,20 @@ public class Philips implements TVControl{
 
                 os.flush();
                 os.close();
+
+                InputStream in = conn.getInputStream();
+                InputStreamReader inputStreamReader = new InputStreamReader(in);
+
+                int inputStreamData = inputStreamReader.read();
+
+                String data = "";
+                while (inputStreamData != -1) {
+                    char current = (char) inputStreamData;
+                    inputStreamData = inputStreamReader.read();
+                    data += current;
+                }
+
+                Log.d("Reply", data);
 
                 conn.disconnect();
             } catch (Exception e) {

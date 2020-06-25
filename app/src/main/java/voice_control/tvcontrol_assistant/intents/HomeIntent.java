@@ -14,6 +14,8 @@ public class HomeIntent extends Intent {
     protected void setDefaultKeywords() {
         this.setKeywords(new String[]{
                 "home",
+                "zuhause",
+                "zu hause"
         });
     }
 }

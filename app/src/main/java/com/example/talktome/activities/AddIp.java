@@ -58,6 +58,9 @@ public class AddIp extends AppCompatActivity {
                 try {
                     socket.connect(address, 50);
                     socket.close();
+                    Socket socket2 = new Socket();
+                    socket2.connect(address, 50);
+                    socket2.close();
                     return ip;
                 } catch (Exception ex) {
                 }
