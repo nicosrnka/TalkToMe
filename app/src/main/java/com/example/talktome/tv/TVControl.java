@@ -1,15 +1,15 @@
 package com.example.talktome.tv;
 
 public interface TVControl {
-    public boolean VolumeUp();
-    public boolean VolumeDown();
-    public boolean ChannelUp();
-    public boolean ChannelDown();
-    public boolean Mute();
-    public boolean Home();
-    public boolean Options();
-    public boolean Shutdown();
-    public boolean Info();
+    public void VolumeUp();
+    public void VolumeDown();
+    public void ChannelUp();
+    public void ChannelDown();
+    public void Mute();
+    public void Home();
+    public void Options();
+    public void Shutdown();
+    public void Info();
 
-    public boolean sendCommand(String command);
+    public void sendCommand(String command);
 }
