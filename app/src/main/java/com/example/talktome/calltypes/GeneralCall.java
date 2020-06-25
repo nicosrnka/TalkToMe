@@ -34,6 +34,7 @@ public class GeneralCall {
     }
 
     public void tryCallingName(String name) {
+
         List<ContactModel> contacts = this.getContactsByName(name);
         try {
             this.handleContactList(contacts);
@@ -45,7 +46,7 @@ public class GeneralCall {
     public void callCaregiver(@NotNull CaregiverModel caregiver) {
         Intent i = new Intent(Intent.ACTION_CALL);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        i.setData(Uri.parse("tel:" + internationalizePhonenumber(caregiver.phonenumber)));
+        i.setData(Uri.parse("tel:" + internationalizePhonenumber(caregiver.getPhoneNumber())));
         appContext.startActivity(i);
     }
 

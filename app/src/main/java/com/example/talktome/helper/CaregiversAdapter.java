@@ -4,9 +4,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.support.design.widget.TextInputLayout;
 
 import com.example.talktome.R;
 import com.example.talktome.models.CaregiverModel;
@@ -25,7 +29,7 @@ public class CaregiversAdapter extends RecyclerView.Adapter<CaregiversAdapter.Ca
         CaregiverViewHolder(View itemView) {
             super(itemView);
             cv = itemView.findViewById(R.id.cv);
-            firstname = (TextInputLayout)itemView.findViewById(R.id.firstname_text_input_layout);
+            firstname = (TextInputLayout) itemView.findViewById(R.id.firstname_text_input_layout);
             lastname = (TextInputLayout)itemView.findViewById(R.id.lastname_text_input_layout);
             phone = (TextInputLayout)itemView.findViewById(R.id.phone_text_input_layout);
         }
@@ -46,10 +50,12 @@ public class CaregiversAdapter extends RecyclerView.Adapter<CaregiversAdapter.Ca
 
     @Override
     public void onBindViewHolder(@NonNull CaregiversAdapter.CaregiverViewHolder caregiverViewHolder, int i) {
-        Objects.requireNonNull(caregiverViewHolder.firstname.getEditText()).setText(caregivers.get(i).firstname);
-        Objects.requireNonNull(caregiverViewHolder).lastname.getEditText().setText(caregivers.get(i).lastname);
-        Objects.requireNonNull(caregiverViewHolder).phone.getEditText().setText(caregivers.get(i).phonenumber);
+        Objects.requireNonNull(caregiverViewHolder).firstname.getEditText().setText(caregivers.get(i).getFirstName());
+        Objects.requireNonNull(caregiverViewHolder).lastname.getEditText().setText(caregivers.get(i).getLastName());
+        Objects.requireNonNull(caregiverViewHolder).phone.getEditText().setText(caregivers.get(i).getPhoneNumber());
     }
+
+
 
     @Override
     public int getItemCount() {

@@ -11,9 +11,11 @@ import voice_control.Assistant;
 import voice_control.IAssistant;
 import voice_control.IIntent;
 import voice_control.call_assistant.commands.CallCommand;
+import voice_control.call_assistant.commands.DuoCallCommand;
 import voice_control.call_assistant.commands.ImergencyCallCommand;
 import voice_control.call_assistant.commands.WhatsAppCallCommand;
 import voice_control.call_assistant.intents.CallIntent;
+import voice_control.call_assistant.intents.DuoCallIntent;
 import voice_control.call_assistant.intents.ImergencyIntent;
 import voice_control.call_assistant.intents.WhatsAppCallIntent;
 import voice_control.commands.ICommand;
@@ -53,9 +55,10 @@ public class CallAssistant extends Assistant
     private IIntent[] getDefaultIntents(Context context)
     {
         return new IIntent[] {
-                new WhatsAppCallIntent(new WhatsAppCallCommand(context), context),
-                new CallIntent(new CallCommand(context, workingSpace), context),
-                new ImergencyIntent(new ImergencyCallCommand(context, this.getEmergencyCaregiver()))
+                new WhatsAppCallIntent(new WhatsAppCallCommand(context, this.workingSpace), context),
+                new CallIntent(new CallCommand(context, this.workingSpace), context),
+                new DuoCallIntent(new DuoCallCommand(context, this.workingSpace), context),
+                new ImergencyIntent(new ImergencyCallCommand(context, this.emergencyCaregiver))
         };
     }
 }
