@@ -13,17 +13,19 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TalkToMeApi.Controllers
 {
+    //login Controller
     [Route("/api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
     {
+        //CONNSTRING kann schöner gelöst werden. Das ist der Pfad zur Datenbank. Siehe: localhost\\SQLEXPRESS
         private const string CONNSTRING = "server=localhost\\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.";
 
         public LoginController()
         {
 
         }
-
+        //Login Methode Parameter string email, string password. Liefert Status Code okay, sowie die Id zurück bei erfolgreicher anmeldung.
         [HttpGet("login")]
         public async Task<IActionResult> Login(string email, string password)
         {
@@ -68,6 +70,8 @@ namespace TalkToMeApi.Controllers
             }
         }
 
+        //SESSION MUSS NOCH IMPLEMENTIERT WERDEN
+
         //[HttpGet("logout")]
         //[Authorize]
         //[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
@@ -84,6 +88,7 @@ namespace TalkToMeApi.Controllers
         //    }
         //}
 
+        //Methode um eine neue Person anzulegen.
         [HttpPost("register")]
         public async Task<IActionResult> Register(PersonModel person)
         {

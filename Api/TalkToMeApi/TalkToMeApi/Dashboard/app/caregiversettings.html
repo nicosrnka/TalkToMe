@@ -44,56 +44,7 @@
     <div class="container background-white mt-2">
         <p class="h4 mb-4 text-center pt-3">Aktuelle Pfleger</p>
         <ul id="list" class="list-group overflow-scroll">
-            <!--<li class="list-group-item no-border d-flex justify-content-between align-items-center">
-                <div>
-                    <input type="text" class="custom-text-field" placeholder="Alex meier" />
-                    <input type="text" class="custom-text-field" placeholder="066049921" />
-                </div>
-                <div>
-                    <i class="fas fa-trash mr-3 cursor-grab"></i>
-                    <i class="far fa-edit cursor-grab"></i>
-                </div>
-            </li>
-            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
-                <div>
-                    <input type="text" class="custom-text-field" placeholder="Nico Srnka" />
-                    <input type="text" class="custom-text-field" placeholder="066043321" />
-                </div>
-                <div>
-                    <i class="fas fa-trash mr-3 cursor-grab"></i>
-                    <i class="far fa-edit cursor-grab"></i>
-                </div>
-            </li>
-            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
-                <div>
-                    <input type="text" class="custom-text-field" placeholder="Maria Xander" />
-                    <input type="text" class="custom-text-field" placeholder="066044410" />
-                </div>
-                <div>
-                    <i class="fas fa-trash mr-3 cursor-grab"></i>
-                    <i class="far fa-edit cursor-grab"></i>
-                </div>
-            </li>
-            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
-                <div>
-                    <input type="text" class="custom-text-field" placeholder="Hannes Peter" />
-                    <input type="text" class="custom-text-field" placeholder="069918323" />
-                </div>
-                <div>
-                    <i class="fas fa-trash mr-3 cursor-grab"></i>
-                    <i class="far fa-edit cursor-grab"></i>
-                </div>
-            </li>
-            <li class="list-group-item no-border d-flex justify-content-between align-items-center">
-                <div>
-                    <input type="text" class="custom-text-field" placeholder="Christian Indo" />
-                    <input type="text" class="custom-text-field" placeholder="069911278" />
-                </div>
-                <div>
-                    <i class="fas fa-trash mr-3 cursor-grab"></i>
-                    <i class="far fa-edit cursor-grab"></i>
-                </div>
-            </li>-->
+
         </ul>
         <!-- Default form register -->
         <form class="text-center border no-border border-light pt-3 pb-3">
@@ -127,11 +78,11 @@
     <script type="text/javascript" src="../js/mdb.js"></script>
 
     <script>
-
+        //liefert alle Caregiver zurück und fügt sie in die liste ein.
         getCaregiver();
         function getCaregiver() {
             let caregivers;
-            $.getJSON('https://localhost:5001/api/Caregiver/GetCaregivers?email=nico.srnka%40gmail.com')
+            $.getJSON('https://localhost:5001/api/Caregiver/GetCaregivers?email=nico.srnka%40gmail.com') //aufgrund der fehlenden login session daher statisch email eingetragen.
                 .done(function (data) {
                     console.log(data);
                     caregivers = data;

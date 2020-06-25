@@ -9,17 +9,19 @@ using TalkToMeApi.Models;
 
 namespace TalkToMeApi.Controllers
 {
+    //Person Controller
     [Route("/api/[controller]")]
     [ApiController]
     public class PersonController : Controller
     {
+        //CONNSTRING kann schöner gelöst werden. Das ist der Pfad zur Datenbank. Siehe: localhost\\SQLEXPRESS
         private const string CONNSTRING = "server=localhost\\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.";
 
         public PersonController()
         {
 
         }
-
+        //Ändert persönliche Informationen einer Person.
         [HttpPut("editPerson")]
         public async Task<IActionResult> EditPerson(PersonModel person)
         {
@@ -50,7 +52,7 @@ namespace TalkToMeApi.Controllers
                 return StatusCode(500);
             }
         }
-
+        //Liefert alle Informationen über die Person zurück
         [HttpGet("getPerson")]
         public async Task<IActionResult> GetPerson(int id)
         {
