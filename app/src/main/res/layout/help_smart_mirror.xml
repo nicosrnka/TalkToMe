@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".activities.AddCaregiver">
+    tools:context=".activities.SmartViewHelper">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,14 +17,19 @@
         android:shrinkColumns="0">
 
         <TableRow>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" Zum Aktivieren der SmartView (Hisense)"
-        tools:fontFamily="sans-serif-condensed-medium"
-        tools:textStyle="bold"
-        tools:textSize="24dp"
-        />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="10dp"
+                android:text=" Zum Aktivieren der SmartView (Hisense)"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@android:color/black"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:typeface="normal"
+                android:visibility="visible" />
     </TableRow>
 
         <TableRow>
@@ -33,14 +38,20 @@
                 android:id="@+id/First_Element"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. Zum Aktivieren der Smart View laden Sie bitte folgende App im Google Play Store hinunter: Smart View TV All Share Cast und Video TV cast."
-                tools:textSize="24dp" />
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="8dp"
+                android:text="\n1. Zum Aktivieren der Smart View laden Sie bitte folgende App im Google Play Store hinunter: Smart View TV All Share Cast und Video TV cast.\n"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="19dp"
+                android:typeface="normal" />
         </TableRow>
         <TableRow>
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="98dp"
+                android:layout_width="375dp"
+                android:layout_height="70dp"
                 android:src="@drawable/smartviewapplogo"
                 tools:layout_editor_absoluteX="142dp"
                 tools:layout_editor_absoluteY="142dp" />
@@ -49,23 +60,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2. Schalten Sie nun den Fernsehen ein"
-            tools:textSize="24dp" />
+            android:text="\n2. Schalten Sie nun den Fernsehen ein"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="19dp"
+            android:typeface="normal" />
         </TableRow>
         <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3. Drücken Sie nun auf den Home-Button wie unten \n angezeigt:"
-                tools:textSize="24dp" />
+                android:text="\n3. Drücken Sie nun auf den Home-Button wie unten angezeigt: \n"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="19dp"
+                android:typeface="normal"/>
         </TableRow>
 
         <TableRow android:layout_width="278dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:src="@drawable/homebutton"
                 tools:layout_editor_absoluteX="142dp"
                 tools:layout_editor_absoluteY="142dp" />
@@ -75,66 +96,93 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4. Danach gehen Sie auf das Tür Symbol (unten links), wie in der Abbildung angezeigt, und wechseln Sie dann in die Anyview Cast. Dadurch ist Ihr Hisense Fernseher dann bereit für den Smart View Share."
-                tools:textSize="24dp" />
+                android:text="\n4. Danach gehen Sie auf das Tür Symbol (unten links), wie in der Abbildung angezeigt, und wechseln Sie dann in die Anyview Cast. Dadurch ist Ihr Hisense Fernseher dann bereit für den Smart View Share. \n"
+                tools:textSize="24dp"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="19dp"
+                android:typeface="normal"/>
         </TableRow>
         <TableRow>
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            tools:layout_editor_absoluteX="142dp"
-            tools:layout_editor_absoluteY="142dp"
-            android:src="@drawable/tuer"/>
+
+            <ImageView
+                android:layout_width="401dp"
+                android:layout_height="74dp"
+                android:src="@drawable/tuer"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="142dp" />
         </TableRow>
         <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5. Danach wechseln Sie in die App, die Sie vorher hinuntergeladen haben. Drücken Sie in der App auf den Startknopf(wie unten in der Abbildung)"
-                tools:textSize="24dp" />
+                android:text="\n5. Danach wechseln Sie in die App, die Sie vorher hinuntergeladen haben. Drücken Sie in der App auf den Startknopf(wie unten in der Abbildung) \n"
+                tools:textSize="24dp"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="19dp"
+                android:typeface="normal"/>
         </TableRow>
         <TableRow>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="68dp"
-            android:src="@drawable/startbutton"
-            tools:layout_editor_absoluteX="142dp"
-            tools:layout_editor_absoluteY="142dp" />
+
+            <ImageView
+                android:layout_width="388dp"
+                android:layout_height="55dp"
+                android:src="@drawable/startbutton"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="142dp" />
         </TableRow>
         <TableRow>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="6. Danach befinden Sie sich im Hauptfenster der App."
-            tools:textSize="24dp" />
+            android:text="\n6. Danach befinden Sie sich im Hauptfenster der App. \n"
+            android:textAllCaps="false"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="19dp"
+            android:typeface="normal"/>
         </TableRow>
         <TableRow>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="162dp"
-            android:src="@drawable/mainsmartview"
-            tools:layout_editor_absoluteX="142dp"
-            tools:layout_editor_absoluteY="142dp" />
+
+            <ImageView
+                android:layout_width="362dp"
+                android:layout_height="124dp"
+                android:src="@drawable/mainsmartview"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="142dp" />
         </TableRow>
         <TableRow>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7. Dannach wählen Sie Ihren Fernseher aus und klicken Sie darauf. Daraufhin wird sich das Handy mit dem Smart TV verbinden. Bitte achten Sie darauf, dass Handy und Smart TV mit dem gleichen Netzwerk verbunden sind. "
-                tools:textSize="24dp" />
+                android:text="\n7. Dannach wählen Sie Ihren Fernseher aus und klicken Sie darauf. Daraufhin wird sich das Handy mit dem Smart TV verbinden. Bitte achten Sie darauf, dass Handy und Smart TV mit dem gleichen Netzwerk verbunden sind. \n"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:lineSpacingExtra="8dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="19dp"
+                android:typeface="normal"/>
         </TableRow>
         <TableRow>
-        <ImageView
-            android:layout_width="393dp"
-            android:layout_height="128dp"
-            android:src="@drawable/verfuegbaregeraete"
-            tools:layout_editor_absoluteX="142dp"
-            tools:layout_editor_absoluteY="142dp" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="108dp"
+                android:src="@drawable/verfuegbaregeraete"
+                tools:layout_editor_absoluteX="142dp"
+                tools:layout_editor_absoluteY="142dp" />
         </TableRow>
         <TableRow>
-        <TextView />
+        <TextView
+            android:text="\n"/>
         </TableRow>
     </TableLayout>
     </ScrollView>
