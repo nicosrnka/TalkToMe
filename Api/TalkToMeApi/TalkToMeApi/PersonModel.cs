@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TalkToMeApi
 {
+    //PersonModelClass. Hier ist das Model für die PersonModelClass.
     public class PersonModel
     {
         public string FirstName { get; set; }

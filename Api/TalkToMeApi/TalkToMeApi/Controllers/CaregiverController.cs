@@ -10,10 +10,13 @@ using TalkToMeApi.Models;
 
 namespace TalkToMeApi.Controllers
 {
+    //Controller für die Caregiver
+
     [Route("/api/[controller]")]
     [ApiController]
     public class CaregiverController : ControllerBase
     {
+        //CONNSTRING kann schöner gelöst werden. Das ist der Pfad zur Datenbank. Siehe: localhost\\SQLEXPRESS
         private const string CONNSTRING = "server=localhost\\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.";
 
         public CaregiverController()
@@ -21,6 +24,7 @@ namespace TalkToMeApi.Controllers
 
         }
 
+        //Liefert alle Caregiver in einer Liste als JSON zurück.
         [HttpGet("getCaregivers")]
         public async Task<IActionResult> GetCaregivers(string email)
         {
@@ -40,6 +44,7 @@ namespace TalkToMeApi.Controllers
             }
         }
 
+        //Löscht den Caregiver über die mitgegebene Id.
         [HttpDelete("deleteCaregiver")]
         public async Task<IActionResult> DeleteCaregiver(int id)
         {
@@ -62,6 +67,7 @@ namespace TalkToMeApi.Controllers
             }
         }
 
+        //Fügt einen Caregiver hinzu.
         [HttpPost("addCaregiver")]
         public async Task<IActionResult> AddCaregiver(CaregiverModel c)
         {
@@ -87,6 +93,7 @@ namespace TalkToMeApi.Controllers
             }
         }
 
+        //Editiert den übergebenen Caregiver.
         [HttpPut("editCaregiver")]
         public async Task<IActionResult> EditCaregiver(CaregiverModel c)
         {

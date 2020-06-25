@@ -1,6 +1,8 @@
-EntityFramework6\Add-Migration Name -ConnectionString 'server=localhost\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.' -ConnectionProvider 'System.Data.SqlClient'
+SQL Server Management Studio und Db installieren.
+
+Datenbank talktome anlegen und dann das file createuser.sql ausführen. Unbedingt dann auf Windows authentifizierung und login umschalten. 
+
+Danach diesen String in VS in der Nuget Paket manager console ausführen.
 
 EntityFramework6\Update-Database -ConnectionString 'server=localhost\SQLEXPRESS;database=talktome; User Id=talktome;Password=talktome123.' -ConnectionProvider 'System.Data.SqlClient'
 
-
-password: talktome123.

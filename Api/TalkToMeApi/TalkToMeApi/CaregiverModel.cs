@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TalkToMeApi
 {
+    //CaregiverModelClass. Hier ist das Model für die Caregiver.
     public class CaregiverModel
     {
         public int Id { get; set; }
